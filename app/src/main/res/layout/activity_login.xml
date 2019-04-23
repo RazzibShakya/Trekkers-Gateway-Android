@@ -55,6 +55,7 @@
         android:layout_marginTop="30dp"
         android:id="@+id/btnLogin"
         style="@style/customs"
+        android:background="@drawable/rounded"
         />
 
 
