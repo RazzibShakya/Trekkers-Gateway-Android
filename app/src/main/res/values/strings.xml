@@ -1,4 +1,5 @@
 <resources>
     <string name="app_name">Trekkers Gateway</string>
     <string name="title_activity_splash_screen">Trekkers Gateway</string>
+    <string name="my_text"> <b><u>Register here</u></b></string>
 </resources>
