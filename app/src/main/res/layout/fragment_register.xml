@@ -112,7 +112,7 @@
         <EditText
             android:layout_marginTop="10dp"
             android:textColorHint="@android:color/black"
-            android:id="@+id/txtpass"
+            android:id="@+id/regpass"
             android:layout_width="300dp"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
@@ -132,7 +132,7 @@
         android:text="Register"
         android:layout_gravity="center"
         android:layout_marginTop="20dp"
-        android:id="@+id/btnregister"
+        android:id="@+id/regregister"
         style="@style/customs"
         android:background="@drawable/rounded"
         />
