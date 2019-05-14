@@ -1,13 +1,11 @@
 package com.trekkersgateway.Activities;
 
-
 import android.app.DatePickerDialog;
 import android.content.Intent;
+import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.support.v4.app.Fragment;
-import android.view.LayoutInflater;
+import android.text.TextUtils;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
@@ -17,49 +15,38 @@ import com.trekkersgateway.R;
 
 import java.util.Calendar;
 
-/**
- * A simple {@link Fragment} subclass.
- */
-public class Register extends Fragment implements View.OnClickListener {
+public class Register extends AppCompatActivity implements View.OnClickListener {
     EditText name, phone, email, username, password;
-    TextView dob;
-    Button btnRegister, btnGotoLogin, btnCalendar;
+    TextView dob,btnGotoLogin;
+    Button btnRegister,  btnCalendar;
     int day, month, year;
     DatePickerDialog datePickerDialog;
     DatePickerDialog.OnDateSetListener listener;
 
-    public Register() {
-        // Required empty public constructor
-    }
-
-
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
-        View view = inflater.inflate(R.layout.fragment_register, container, false);
-        initiate(view);
-        return view;
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_register);
+        getSupportActionBar().hide();
+        initiate();
     }
+    public void initiate() {
+        name = findViewById(R.id.regname);
+        phone = findViewById(R.id.regphone);
+        email = findViewById(R.id.regemail);
+        dob = findViewById(R.id.tvDate);
+        username = findViewById(R.id.regusername);
+        password = findViewById(R.id.regpass);
 
-    public void initiate(View v) {
-        name = v.findViewById(R.id.regname);
-        phone = v.findViewById(R.id.regphone);
-        email = v.findViewById(R.id.regemail);
-        dob = v.findViewById(R.id.tvDate);
-        username = v.findViewById(R.id.regusername);
-        password = v.findViewById(R.id.regpass);
-
-        btnCalendar = v.findViewById(R.id.btndate);
-        btnRegister = v.findViewById(R.id.regregister);
-        btnGotoLogin = v.findViewById(R.id.btngotologin);
+        btnCalendar = findViewById(R.id.btndate);
+        btnRegister = findViewById(R.id.regregister);
+        btnGotoLogin = findViewById(R.id.btngotologin);
 
         btnCalendar.setOnClickListener(this);
         btnRegister.setOnClickListener(this);
         btnGotoLogin.setOnClickListener(this);
 
         SelectDate();
-
     }
 
     public void SelectDate(){
@@ -75,12 +62,63 @@ public class Register extends Fragment implements View.OnClickListener {
                 setDate(year,month+1,day);
             }
         };
-        datePickerDialog=new DatePickerDialog(getActivity(),listener,year,month+1,day);
+        datePickerDialog=new DatePickerDialog(this,listener,year,month+1,day);
     }
 
-
+//this is method for setting date from date picker
     public void setDate(int year,int month, int day){
         dob.setText(year+"-"+month+"-"+day);
+    }
+
+//this method is for validating the textfields
+    public boolean RegisterValidation(){
+        boolean res=false;
+        if(name.getText().toString().isEmpty()){
+            name.setError("Fill Your Name");
+            name.requestFocus();
+        }
+        if(phone.getText().toString().isEmpty()){
+            phone.setError("Fill Your phone number");
+            phone.requestFocus();
+        }
+
+        if(email.getText().toString().isEmpty()){
+            email.setError("Fill Your email");
+            email.requestFocus();
+        }
+
+        if(username.getText().toString().isEmpty()){
+            username.setError("Fill Your username");
+            username.requestFocus();
+        }
+
+        if(password.getText().toString().isEmpty()){
+            password.setError("Fill Your password");
+            password.requestFocus();
+        }
+        if(!TextUtils.isEmpty(name.getText().toString())&&!TextUtils.isEmpty(password.getText().toString())&&!TextUtils.isEmpty(phone.getText().toString())&&
+                !TextUtils.isEmpty(email.getText().toString())&&!TextUtils.isEmpty(username.getText().toString())&&!TextUtils.isEmpty(password.getText().toString())){
+            res=true;
+        }else{
+            name.setError("Fill Your Name");
+            phone.setError("Fill Your phone number");
+            email.setError("Fill Your email");
+            password.setError("Fill Your password");
+            username.setError("Fill Your username");
+            name.requestFocus();
+        }
+        return res;
+    }
+
+    //this method is to save users into database or apu
+
+    public void Register(){
+
+
+
+
+
+
     }
 
     @Override
@@ -91,11 +129,14 @@ public class Register extends Fragment implements View.OnClickListener {
 
                 break;
             case R.id.btngotologin:
-                Intent intent = new Intent(getActivity(), Login.class);
+                Intent intent = new Intent(Register.this, Login.class);
                 startActivity(intent);
 
                 break;
             case R.id.regregister:
+                if(RegisterValidation()==true){
+
+                }
 
 
                 break;
