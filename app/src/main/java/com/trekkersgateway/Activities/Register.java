@@ -10,10 +10,18 @@ import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import com.trekkersgateway.Model.RetrofitModel;
+import com.trekkersgateway.Model.User;
+import com.trekkersgateway.Model.UserAPI;
 import com.trekkersgateway.R;
 
 import java.util.Calendar;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 public class Register extends AppCompatActivity implements View.OnClickListener {
     EditText name, phone, email, username, password;
@@ -110,15 +118,26 @@ public class Register extends AppCompatActivity implements View.OnClickListener 
         return res;
     }
 
-    //this method is to save users into database or apu
+    //this method is to save users into database or api
 
     public void Register(){
+        RetrofitModel rm=new RetrofitModel();
+        User user=new User(Integer.parseInt(null),name.getText().toString(),email.getText().toString(),phone.getText().toString(),
+                dob.getText().toString(),username.getText().toString(),password.getText().toString());
+        Call<Void>addNewUser=rm.createInstanceofRetrofit().addNewUser(user);
+        addNewUser.enqueue(new Callback<Void>() {
+            @Override
+            public void onResponse(Call<Void> call, Response<Void> response) {
+                Toast.makeText(getApplicationContext(),"User added successfully",Toast.LENGTH_SHORT).show();
+                Intent intent = new Intent(Register.this,Login.class);
+                startActivity(intent);
+            }
 
-
-
-
-
-
+            @Override
+            public void onFailure(Call<Void> call, Throwable t) {
+                Toast.makeText(getApplicationContext(),"Error :"+t.getMessage(),Toast.LENGTH_SHORT).show();
+            }
+        });
     }
 
     @Override
@@ -135,10 +154,8 @@ public class Register extends AppCompatActivity implements View.OnClickListener 
                 break;
             case R.id.regregister:
                 if(RegisterValidation()==true){
-
+                    Register();
                 }
-
-
                 break;
         }
     }
