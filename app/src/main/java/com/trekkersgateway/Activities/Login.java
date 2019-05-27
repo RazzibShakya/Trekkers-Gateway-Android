@@ -1,6 +1,7 @@
 package com.trekkersgateway.Activities;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -14,6 +15,8 @@ public class Login extends AppCompatActivity implements View.OnClickListener {
     EditText txtusername, pwpass;
     Button btnlogin;
     TextView btnregister, btnforget;
+    SharedPreferences preferences;
+    private SharedPreferences.Editor editor;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -21,6 +24,8 @@ public class Login extends AppCompatActivity implements View.OnClickListener {
         setContentView(R.layout.activity_login);
         getSupportActionBar().hide();
         initiate();
+        preferences = getSharedPreferences("APP", MODE_PRIVATE);
+        editor=preferences.edit();
     }
 
     public void initiate() {

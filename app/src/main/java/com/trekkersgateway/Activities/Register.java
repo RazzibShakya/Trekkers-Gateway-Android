@@ -12,9 +12,8 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.trekkersgateway.Model.RetrofitModel;
+import com.trekkersgateway.Model.Functions;
 import com.trekkersgateway.Model.User;
-import com.trekkersgateway.Model.UserAPI;
 import com.trekkersgateway.R;
 
 import java.util.Calendar;
@@ -128,7 +127,7 @@ public class Register extends AppCompatActivity implements View.OnClickListener 
     //this method is to save users into database or api
 
     public void Register(){
-        RetrofitModel rm=new RetrofitModel();
+        Functions rm=new Functions();
         User user=new User(name.getText().toString(),email.getText().toString(),phone.getText().toString(),
                 dob.getText().toString(),address.getText().toString(),username.getText().toString(),password.getText().toString());
         Call<Void>addNewUser=rm.createInstanceofRetrofit().addNewUser(user);

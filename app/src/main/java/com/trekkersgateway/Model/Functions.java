@@ -1,10 +1,13 @@
 package com.trekkersgateway.Model;
 
+import android.content.SharedPreferences;
+
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
-public class RetrofitModel {
+public class Functions {
     private UserAPI userAPI;
+
 
     public UserAPI createInstanceofRetrofit(){
         Retrofit retrofit = new Retrofit.Builder()
