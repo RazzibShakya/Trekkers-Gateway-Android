@@ -8,10 +8,10 @@
     android:background="@drawable/lang">
 
     <ImageView
-        android:layout_width="200dp"
-        android:layout_height="200dp"
+        android:layout_width="300dp"
+        android:layout_height="350dp"
         android:scaleType="centerInside"
-        android:src="@drawable/ic_launcher_background"
+        android:src="@drawable/logo"
         android:layout_gravity="center"
         android:layout_weight="2"
         />

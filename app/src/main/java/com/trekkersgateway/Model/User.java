@@ -1,24 +1,32 @@
 package com.trekkersgateway.Model;
 
 public class User {
-    private int id;
-    private String name,email,phone,dob,username,password;
+    private String name,email,phone,dob,address,username,password;
 
-    public User(int id,String name, String email, String phone, String dob, String username, String password) {
-        this.id=id;
+    public User(String name, String email, String phone, String dob,String address, String username, String password) {
+
         this.name = name;
         this.email = email;
         this.phone = phone;
         this.dob = dob;
+        this.address = address;
         this.username = username;
         this.password = password;
     }
-    public int getid() {
-        return id;
+//    public int getid() {
+//        return id;
+//    }
+//
+//    public void setid(int id) {
+//        this.id = id;
+//    }
+
+    public String getAddress() {
+        return address;
     }
 
-    public void setid(int id) {
-        this.id = id;
+    public void setAddress(String address) {
+        this.address = address;
     }
 
     public String getName() {

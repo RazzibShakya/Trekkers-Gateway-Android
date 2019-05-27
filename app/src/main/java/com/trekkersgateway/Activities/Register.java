@@ -24,7 +24,7 @@ import retrofit2.Callback;
 import retrofit2.Response;
 
 public class Register extends AppCompatActivity implements View.OnClickListener {
-    EditText name, phone, email, username, password;
+    EditText name, phone, email, username, password,address;
     TextView dob,btnGotoLogin;
     Button btnRegister,  btnCalendar;
     int day, month, year;
@@ -45,6 +45,7 @@ public class Register extends AppCompatActivity implements View.OnClickListener 
         dob = findViewById(R.id.tvDate);
         username = findViewById(R.id.regusername);
         password = findViewById(R.id.regpass);
+        address = findViewById(R.id.regaddress);
 
         btnCalendar = findViewById(R.id.btndate);
         btnRegister = findViewById(R.id.regregister);
@@ -104,6 +105,11 @@ public class Register extends AppCompatActivity implements View.OnClickListener 
             password.setError("Fill Your password");
             password.requestFocus();
         }
+
+        if(address.getText().toString().isEmpty()){
+            address.setError("Fill Your address");
+            address.requestFocus();
+        }
         if(!TextUtils.isEmpty(name.getText().toString())&&!TextUtils.isEmpty(password.getText().toString())&&!TextUtils.isEmpty(phone.getText().toString())&&
                 !TextUtils.isEmpty(email.getText().toString())&&!TextUtils.isEmpty(username.getText().toString())&&!TextUtils.isEmpty(password.getText().toString())){
             res=true;
@@ -113,6 +119,7 @@ public class Register extends AppCompatActivity implements View.OnClickListener 
             email.setError("Fill Your email");
             password.setError("Fill Your password");
             username.setError("Fill Your username");
+            address.setError("Fill Your address");
             name.requestFocus();
         }
         return res;
@@ -122,8 +129,8 @@ public class Register extends AppCompatActivity implements View.OnClickListener 
 
     public void Register(){
         RetrofitModel rm=new RetrofitModel();
-        User user=new User(Integer.parseInt(null),name.getText().toString(),email.getText().toString(),phone.getText().toString(),
-                dob.getText().toString(),username.getText().toString(),password.getText().toString());
+        User user=new User(name.getText().toString(),email.getText().toString(),phone.getText().toString(),
+                dob.getText().toString(),address.getText().toString(),username.getText().toString(),password.getText().toString());
         Call<Void>addNewUser=rm.createInstanceofRetrofit().addNewUser(user);
         addNewUser.enqueue(new Callback<Void>() {
             @Override

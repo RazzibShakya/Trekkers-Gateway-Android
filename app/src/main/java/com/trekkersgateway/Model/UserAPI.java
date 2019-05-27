@@ -8,7 +8,7 @@ import retrofit2.http.POST;
 import retrofit2.http.Path;
 
 public interface UserAPI {
-    @POST("userupload")
+    @POST("createuser")
     Call<Void>addNewUser(@Body User user);
 
     @GET("employee/{id}")
