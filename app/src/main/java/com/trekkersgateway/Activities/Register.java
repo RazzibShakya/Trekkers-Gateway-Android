@@ -81,6 +81,7 @@ public class Register extends AppCompatActivity implements View.OnClickListener 
 //this method is for validating the textfields
     public boolean RegisterValidation(){
         boolean res=false;
+        String emailPattern = "[a-zA-Z0-9._-]+@[a-z]+\\.+[a-z]+";
         if(name.getText().toString().isEmpty()){
             name.setError("Fill Your Name");
             name.requestFocus();
@@ -93,6 +94,16 @@ public class Register extends AppCompatActivity implements View.OnClickListener 
         if(email.getText().toString().isEmpty()){
             email.setError("Fill Your email");
             email.requestFocus();
+        }else if(!email.getText().toString().trim().matches(emailPattern)){
+            email.setError("Your email is not valid");
+        }else{
+
+        }
+
+
+        if(dob.getText().toString().isEmpty()||!dob.getText().toString().matches("^(1[0-9]|0[1-9]|3[0-1]|2[1-9])/(0[1-9]|1[0-2])/[0-9]{4}$")){
+            dob.setError("Date is invalid");
+            dob.requestFocus();
         }
 
         if(username.getText().toString().isEmpty()){
@@ -100,8 +111,8 @@ public class Register extends AppCompatActivity implements View.OnClickListener 
             username.requestFocus();
         }
 
-        if(password.getText().toString().isEmpty()){
-            password.setError("Fill Your password");
+        if(password.getText().toString().isEmpty()||password.getText().toString().length()>6){
+            password.setError("Invalid password or password must have atleast 6 characters");
             password.requestFocus();
         }
 
