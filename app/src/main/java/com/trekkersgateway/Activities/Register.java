@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.DatePicker;
@@ -13,7 +14,9 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.trekkersgateway.Model.Functions;
+import com.trekkersgateway.Model.LoginResponse;
 import com.trekkersgateway.Model.User;
+import com.trekkersgateway.Model.UserAPI;
 import com.trekkersgateway.R;
 
 import java.util.Calendar;
@@ -21,6 +24,7 @@ import java.util.Calendar;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
+import retrofit2.http.Url;
 
 public class Register extends AppCompatActivity implements View.OnClickListener {
     EditText name, phone, email, username, password,address;
@@ -79,51 +83,10 @@ public class Register extends AppCompatActivity implements View.OnClickListener 
     }
 
 //this method is for validating the textfields
-    public boolean RegisterValidation(){
-        boolean res=false;
+    public boolean RegisterValidation() {
         String emailPattern = "[a-zA-Z0-9._-]+@[a-z]+\\.+[a-z]+";
-        if(name.getText().toString().isEmpty()){
-            name.setError("Fill Your Name");
-            name.requestFocus();
-        }
-        if(phone.getText().toString().isEmpty()){
-            phone.setError("Fill Your phone number");
-            phone.requestFocus();
-        }
-
-        if(email.getText().toString().isEmpty()){
-            email.setError("Fill Your email");
-            email.requestFocus();
-        }else if(!email.getText().toString().trim().matches(emailPattern)){
-            email.setError("Your email is not valid");
-        }else{
-
-        }
-
-
-        if(dob.getText().toString().isEmpty()||!dob.getText().toString().matches("^(1[0-9]|0[1-9]|3[0-1]|2[1-9])/(0[1-9]|1[0-2])/[0-9]{4}$")){
-            dob.setError("Date is invalid");
-            dob.requestFocus();
-        }
-
-        if(username.getText().toString().isEmpty()){
-            username.setError("Fill Your username");
-            username.requestFocus();
-        }
-
-        if(password.getText().toString().isEmpty()||password.getText().toString().length()>6){
-            password.setError("Invalid password or password must have atleast 6 characters");
-            password.requestFocus();
-        }
-
-        if(address.getText().toString().isEmpty()){
-            address.setError("Fill Your address");
-            address.requestFocus();
-        }
-        if(!TextUtils.isEmpty(name.getText().toString())&&!TextUtils.isEmpty(password.getText().toString())&&!TextUtils.isEmpty(phone.getText().toString())&&
-                !TextUtils.isEmpty(email.getText().toString())&&!TextUtils.isEmpty(username.getText().toString())&&!TextUtils.isEmpty(password.getText().toString())){
-            res=true;
-        }else{
+        if (TextUtils.isEmpty(name.getText().toString()) && TextUtils.isEmpty(password.getText().toString()) && TextUtils.isEmpty(phone.getText().toString()) &&
+                TextUtils.isEmpty(email.getText().toString()) && TextUtils.isEmpty(username.getText().toString()) && TextUtils.isEmpty(password.getText().toString())) {
             name.setError("Fill Your Name");
             phone.setError("Fill Your phone number");
             email.setError("Fill Your email");
@@ -131,9 +94,56 @@ public class Register extends AppCompatActivity implements View.OnClickListener 
             username.setError("Fill Your username");
             address.setError("Fill Your address");
             name.requestFocus();
+            return false;
         }
-        return res;
+        if (name.getText().toString().isEmpty()) {
+            name.setError("Fill Your Name");
+            name.requestFocus();
+            return false;
+        }
+        if (phone.getText().toString().isEmpty()) {
+            phone.setError("Fill Your phone number");
+            phone.requestFocus();
+            return false;
+        }
+
+        if (email.getText().toString().isEmpty() || !email.getText().toString().trim().matches(emailPattern)) {
+            email.setError("Your email is invalid");
+            email.requestFocus();
+            return false;
+        }
+
+        if (address.getText().toString().isEmpty()) {
+            address.setError("Fill Your address");
+            address.requestFocus();
+            return false;
+        }
+
+        if (username.getText().toString().isEmpty()) {
+            username.setError("Fill Your username");
+            username.requestFocus();
+            return false;
+        }
+
+        if (password.getText().toString().isEmpty() || password.getText().toString().length() < 6) {
+            password.setError("Invalid password or password must have atleast 6 characters");
+            password.requestFocus();
+            return false;
+        }
+
+        if (!dob.getText().toString().isEmpty()) {
+
+
+        }else{
+            dob.setError("Date is invalid");
+            dob.requestFocus();
+            return false;
+        }
+
+    return true;
     }
+
+
 
     //this method is to save users into database or api
 
@@ -156,6 +166,9 @@ public class Register extends AppCompatActivity implements View.OnClickListener 
             }
         });
     }
+
+
+
 
     @Override
     public void onClick(View v) {

@@ -8,8 +8,15 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import com.trekkersgateway.Model.Functions;
+import com.trekkersgateway.Model.LoginResponse;
 import com.trekkersgateway.R;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 public class Login extends AppCompatActivity implements View.OnClickListener {
     EditText txtusername, pwpass;
@@ -38,21 +45,53 @@ public class Login extends AppCompatActivity implements View.OnClickListener {
         btnregister.setOnClickListener(this);
     }
 
-    public void Login(){
+    //this is for login
+    private void checkUser(){
+
+        Functions fun=new Functions();
+        Call<LoginResponse> userCall=fun.createInstanceofRetrofit().checkUser(txtusername.getText().toString().trim(),pwpass.getText().toString().trim());
+        userCall.enqueue(new Callback<LoginResponse>() {
+            @Override
+            public void onResponse(Call<LoginResponse> call, Response<LoginResponse> response) {
+                if(!response.isSuccessful()){
+                    Toast.makeText(Login.this,"Your username or password is incorrect",Toast.LENGTH_SHORT).show();
+                }else{
+                    if(response.body().isSuccess()){
+                        Toast.makeText(Login.this,"Your have successfully signed in",Toast.LENGTH_SHORT).show();
+                        Intent intent=new Intent(Login.this,Dashboard.class);
+                        startActivity(intent);
+                        finish();
+                    }
+                }
+            }
+
+            @Override
+            public void onFailure(Call<LoginResponse> call, Throwable t) {
+                Toast.makeText(Login.this, "Error:"+t.getLocalizedMessage(), Toast.LENGTH_SHORT).show();
+
+            }
+        });
+
+    }
+
+    public boolean Login(){
       if(txtusername.getText().toString().isEmpty()){
           txtusername.setError("Enter Username");
           txtusername.requestFocus();
+          return false;
       }
       else if(pwpass.getText().toString().isEmpty()){
           pwpass.setError("Enter Password");
           pwpass.requestFocus();
+          return false;
       }
       else if(pwpass.getText().toString().isEmpty()&&pwpass.getText().toString().isEmpty()){
             txtusername.setError("Enter Password");
             pwpass.setError("Enter Password");
             txtusername.requestFocus();
+            return false;
         }else{
-
+return true;
           
       }
     }
@@ -61,7 +100,9 @@ public class Login extends AppCompatActivity implements View.OnClickListener {
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.btnLogin:
-                Login();
+                if(Login()==true){
+                    checkUser();
+                }
 
                 break;
             case R.id.btnregister:
