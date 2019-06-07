@@ -3,6 +3,8 @@ package com.trekkersgateway.Activities;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
 import android.support.v7.app.AppCompatActivity;
 import android.view.MenuItem;
 import android.widget.TextView;
@@ -12,7 +14,12 @@ import com.trekkersgateway.R;
 public class Dashboard extends AppCompatActivity {
 
     private TextView mTextMessage;
-
+    final Fragment fragmenttrek = new Alltreks();
+    final Fragment fragmentforum = new Forum();
+    final Fragment fragmentfeed = new FeedPost();
+    final Fragment fragmentnews = new News();
+    final Fragment fragmentprofile = new Profile();
+    final FragmentManager fm = getSupportFragmentManager();
     private BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener
             = new BottomNavigationView.OnNavigationItemSelectedListener() {
 
