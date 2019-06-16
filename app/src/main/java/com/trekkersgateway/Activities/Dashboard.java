@@ -62,4 +62,8 @@ public class Dashboard extends AppCompatActivity implements BottomNavigationView
 
         return loadFragment(fragment);
     }
+
+    public void setActionBarTitle(String title) {
+        getSupportActionBar().setTitle(title);
+    }
 }
