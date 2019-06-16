@@ -46,7 +46,7 @@ public class Login extends AppCompatActivity implements View.OnClickListener {
     }
 
     //this is for login
-    private void checkUser(){
+    private void Login(){
 
         Functions fun=new Functions();
         Call<LoginResponse> userCall=fun.createInstanceofRetrofit().checkUser(txtusername.getText().toString().trim(),pwpass.getText().toString().trim());
@@ -74,7 +74,7 @@ public class Login extends AppCompatActivity implements View.OnClickListener {
 
     }
 
-    public boolean Login(){
+    public boolean checkUser(){
       if(txtusername.getText().toString().isEmpty()){
           txtusername.setError("Enter Username");
           txtusername.requestFocus();
@@ -100,8 +100,8 @@ return true;
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.btnLogin:
-                if(Login()==true){
-                    checkUser();
+                if(checkUser()==true){
+                    Login();
                 }
 
                 break;

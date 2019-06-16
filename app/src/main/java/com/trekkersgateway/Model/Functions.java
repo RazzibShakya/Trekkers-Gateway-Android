@@ -11,7 +11,7 @@ public class Functions {
 
     public UserAPI createInstanceofRetrofit(){
         Retrofit retrofit = new Retrofit.Builder()
-                .baseUrl("http://10.0.2.2:3000/")
+                .baseUrl("http://10.0.2.2:3000/TrekkersGateway/")
                 .addConverterFactory(GsonConverterFactory.create())
                 .build();
         userAPI = retrofit.create(UserAPI.class);

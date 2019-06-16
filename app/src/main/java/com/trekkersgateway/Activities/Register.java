@@ -27,7 +27,7 @@ import retrofit2.Response;
 import retrofit2.http.Url;
 
 public class Register extends AppCompatActivity implements View.OnClickListener {
-    EditText name, phone, email, username, password,address;
+    EditText name, phone, email, username, password,address,country;
     TextView dob,btnGotoLogin;
     Button btnRegister,  btnCalendar;
     int day, month, year;
@@ -49,6 +49,7 @@ public class Register extends AppCompatActivity implements View.OnClickListener 
         username = findViewById(R.id.regusername);
         password = findViewById(R.id.regpass);
         address = findViewById(R.id.regaddress);
+        country = findViewById(R.id.regcountry);
 
         btnCalendar = findViewById(R.id.btndate);
         btnRegister = findViewById(R.id.regregister);
@@ -106,6 +107,11 @@ public class Register extends AppCompatActivity implements View.OnClickListener 
             phone.requestFocus();
             return false;
         }
+        if (country.getText().toString().isEmpty()) {
+            country.setError("Fill where you are from");
+            country.requestFocus();
+            return false;
+        }
 
         if (email.getText().toString().isEmpty() || !email.getText().toString().trim().matches(emailPattern)) {
             email.setError("Your email is invalid");
@@ -147,10 +153,9 @@ public class Register extends AppCompatActivity implements View.OnClickListener 
 
     //this method is to save users into database or api
 
-    public void Register(){
+    public void Register(String name,String email,String phone,String country,String dob,String address,String username,String password){
         Functions rm=new Functions();
-        User user=new User(name.getText().toString(),email.getText().toString(),phone.getText().toString(),
-                dob.getText().toString(),address.getText().toString(),username.getText().toString(),password.getText().toString());
+        User user=new User(name,email,phone,country,dob,address,username,password);
         Call<Void>addNewUser=rm.createInstanceofRetrofit().addNewUser(user);
         addNewUser.enqueue(new Callback<Void>() {
             @Override
@@ -184,7 +189,8 @@ public class Register extends AppCompatActivity implements View.OnClickListener 
                 break;
             case R.id.regregister:
                 if(RegisterValidation()==true){
-                    Register();
+                    Register(name.getText().toString(),email.getText().toString(),phone.getText().toString(),country.getText().toString(),
+                            dob.getText().toString(),address.getText().toString(),username.getText().toString(),password.getText().toString());
                 }
                 break;
         }

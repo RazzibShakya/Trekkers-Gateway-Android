@@ -53,6 +53,19 @@
             android:hint="Enter Your Phone Number"
             style="@style/customs"
             />
+
+        <EditText
+            android:id="@+id/regcountry"
+            android:textColorHint="@android:color/black"
+            android:layout_width="300dp"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_centerVertical="true"
+            android:ems="10"
+            android:layout_gravity="center"
+            android:hint="Enter Your Place"
+            style="@style/customs"
+            />
         <EditText
             android:layout_marginTop="10dp"
             android:id="@+id/regemail"
