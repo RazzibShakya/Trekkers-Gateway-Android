@@ -14,6 +14,8 @@ import com.trekkersgateway.Model.Functions;
 import com.trekkersgateway.Model.LoginResponse;
 import com.trekkersgateway.R;
 
+import java.io.Serializable;
+
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -59,6 +61,7 @@ public class Login extends AppCompatActivity implements View.OnClickListener {
                     if(!response.body().getToken().equals(null)){
                         Toast.makeText(Login.this,"Your have successfully signed in"+response.body().getToken(),Toast.LENGTH_SHORT).show();
                         Intent intent=new Intent(Login.this,Dashboard.class);
+                        intent.putExtra("User_obj", (Serializable) response.body().getuser());
                         startActivity(intent);
                         editor.putString("token", response.body().getToken());
                         editor.commit();

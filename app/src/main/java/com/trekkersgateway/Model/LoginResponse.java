@@ -2,13 +2,13 @@ package com.trekkersgateway.Model;
 
 public class LoginResponse {
     private String token;
-    private String status;
+    private User user;
 
     public String getToken() {
         return token;
     }
 
-    public String getStatus() {
-        return status;
+    public User getuser() {
+        return user;
     }
 }
