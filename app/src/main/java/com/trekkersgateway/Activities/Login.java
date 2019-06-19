@@ -10,6 +10,7 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.gson.Gson;
 import com.trekkersgateway.Model.Functions;
 import com.trekkersgateway.Model.LoginResponse;
 import com.trekkersgateway.R;
@@ -61,10 +62,12 @@ public class Login extends AppCompatActivity implements View.OnClickListener {
                     if(!response.body().getToken().equals(null)){
                         Toast.makeText(Login.this,"Your have successfully signed in"+response.body().getToken(),Toast.LENGTH_SHORT).show();
                         Intent intent=new Intent(Login.this,Dashboard.class);
-                        intent.putExtra("User_obj", (Serializable) response.body().getuser());
-                        startActivity(intent);
                         editor.putString("token", response.body().getToken());
+                        Gson gson = new Gson();
+                        String json = gson.toJson(response.body().getUser());
+                        editor.putString("userobj", json);
                         editor.commit();
+                        startActivity(intent);
                         finish();
                     }
                 }
@@ -72,7 +75,7 @@ public class Login extends AppCompatActivity implements View.OnClickListener {
 
             @Override
             public void onFailure(Call<LoginResponse> call, Throwable t) {
-                Toast.makeText(Login.this, "Error:"+t.getLocalizedMessage(), Toast.LENGTH_SHORT).show();
+                Toast.makeText(Login.this, "Your username and password does not match", Toast.LENGTH_SHORT).show();
 
             }
         });

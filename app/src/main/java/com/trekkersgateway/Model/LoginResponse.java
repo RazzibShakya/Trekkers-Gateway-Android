@@ -8,7 +8,7 @@ public class LoginResponse {
         return token;
     }
 
-    public User getuser() {
+    public User getUser() {
         return user;
     }
 }

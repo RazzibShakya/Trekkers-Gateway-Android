@@ -1,5 +1,6 @@
 package com.trekkersgateway.Activities;
 
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
@@ -7,7 +8,10 @@ import android.support.v4.app.Fragment;
 import android.support.v7.app.AppCompatActivity;
 import android.view.MenuItem;
 
+import com.google.gson.Gson;
+import com.trekkersgateway.Model.User;
 import com.trekkersgateway.R;
+
 
 public class Dashboard extends AppCompatActivity implements BottomNavigationView.OnNavigationItemSelectedListener {
 
@@ -19,6 +23,7 @@ public class Dashboard extends AppCompatActivity implements BottomNavigationView
         loadFragment(new Alltreks());
         BottomNavigationView navigation = findViewById(R.id.navigation);
         navigation.setOnNavigationItemSelectedListener(this);
+getUser();
     }
 
     private boolean loadFragment(Fragment fragment) {
@@ -56,7 +61,7 @@ public class Dashboard extends AppCompatActivity implements BottomNavigationView
                 break;
 
             case R.id.navigation_news:
-                fragment = new News();
+                fragment = new NewsFrag();
                 break;
         }
 
@@ -66,4 +71,13 @@ public class Dashboard extends AppCompatActivity implements BottomNavigationView
     public void setActionBarTitle(String title) {
         getSupportActionBar().setTitle(title);
     }
+
+public User getUser(){
+    SharedPreferences shared=getSharedPreferences("APP",MODE_PRIVATE);
+    Gson gson = new Gson();
+    String json = shared.getString("userobj", "");
+    User user = gson.fromJson(json, User.class);
+    return user;
+}
+
 }
