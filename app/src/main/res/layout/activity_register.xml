@@ -55,6 +55,7 @@
             />
 
         <EditText
+            android:layout_marginTop="10dp"
             android:id="@+id/regcountry"
             android:textColorHint="@android:color/black"
             android:layout_width="300dp"

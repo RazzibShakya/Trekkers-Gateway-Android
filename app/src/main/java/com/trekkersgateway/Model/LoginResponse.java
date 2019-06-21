@@ -1,14 +1,14 @@
 package com.trekkersgateway.Model;
 
 public class LoginResponse {
-    private boolean success;
-    private String status;
+    private String token;
+    private User user;
 
-    public boolean isSuccess() {
-        return success;
+    public String getToken() {
+        return token;
     }
 
-    public String getStatus() {
-        return status;
+    public User getuser() {
+        return user;
     }
 }

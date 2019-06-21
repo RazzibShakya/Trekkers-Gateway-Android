@@ -15,12 +15,12 @@ public class SplashScreen extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
+      super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_splash_screen);
         getSupportActionBar().hide();
         preferences = getSharedPreferences("APP", MODE_PRIVATE);
         editor=preferences.edit();
-        String val=preferences.getString("Username", "");
+        String val=preferences.getString("token", "");
         if(val.isEmpty()){
             final Intent intent = new Intent(SplashScreen.this, Login.class);
             new Handler().postDelayed(new Runnable() {
@@ -31,7 +31,8 @@ public class SplashScreen extends AppCompatActivity {
                 }
             },3000);
         }else{
-            Intent intent1=new Intent(SplashScreen.this,Login.class);
+            Intent intent1=new Intent(this,Dashboard.class);
+            startActivity(intent1);
         }
 
     }

@@ -14,6 +14,8 @@ import com.trekkersgateway.Model.Functions;
 import com.trekkersgateway.Model.LoginResponse;
 import com.trekkersgateway.R;
 
+import java.io.Serializable;
+
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -46,20 +48,23 @@ public class Login extends AppCompatActivity implements View.OnClickListener {
     }
 
     //this is for login
-    private void Login(){
+    private void Login(String username,String password){
 
         Functions fun=new Functions();
-        Call<LoginResponse> userCall=fun.createInstanceofRetrofit().checkUser(txtusername.getText().toString().trim(),pwpass.getText().toString().trim());
+        Call<LoginResponse> userCall=fun.createInstanceofRetrofit().checkUser(username.trim(),password.trim());
         userCall.enqueue(new Callback<LoginResponse>() {
             @Override
             public void onResponse(Call<LoginResponse> call, Response<LoginResponse> response) {
                 if(!response.isSuccessful()){
                     Toast.makeText(Login.this,"Your username or password is incorrect",Toast.LENGTH_SHORT).show();
                 }else{
-                    if(response.body().isSuccess()){
-                        Toast.makeText(Login.this,"Your have successfully signed in",Toast.LENGTH_SHORT).show();
+                    if(!response.body().getToken().equals(null)){
+                        Toast.makeText(Login.this,"Your have successfully signed in"+response.body().getToken(),Toast.LENGTH_SHORT).show();
                         Intent intent=new Intent(Login.this,Dashboard.class);
+                        intent.putExtra("User_obj", (Serializable) response.body().getuser());
                         startActivity(intent);
+                        editor.putString("token", response.body().getToken());
+                        editor.commit();
                         finish();
                     }
                 }
@@ -101,7 +106,7 @@ return true;
         switch (v.getId()) {
             case R.id.btnLogin:
                 if(checkUser()==true){
-                    Login();
+                    Login(txtusername.getText().toString(),pwpass.getText().toString());
                 }
 
                 break;
