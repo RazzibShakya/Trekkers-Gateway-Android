@@ -42,7 +42,7 @@ public class NewsRecyclerAdapter extends RecyclerView.Adapter<NewsRecyclerAdapte
     }
 
     public class NewsViewHolder extends RecyclerView.ViewHolder {
-        
+
         public NewsViewHolder(@NonNull View itemView) {
             super(itemView);
         }

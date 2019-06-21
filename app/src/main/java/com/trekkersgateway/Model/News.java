@@ -2,21 +2,25 @@ package com.trekkersgateway.Model;
 
 
 public class News {
-    String id,headline,description,imagename,posted_date;
+    String id,topic,description,imagename,createdate,postedby,link;
 
-    public News(String id, String headline, String description, String imagename, String posted_date) {
+    public News(String id, String topic, String description, String imagename, String createdate, String postedby, String link) {
         this.id = id;
-        this.headline = headline;
+        this.topic = topic;
         this.description = description;
         this.imagename = imagename;
-        this.posted_date = posted_date;
+        this.createdate = createdate;
+        this.postedby = postedby;
+        this.link = link;
     }
 
-    public News(String headline, String description, String imagename, String posted_date) {
-        this.headline = headline;
+    public News(String topic, String description, String imagename, String createdate, String postedby, String link) {
+        this.topic = topic;
         this.description = description;
         this.imagename = imagename;
-        this.posted_date = posted_date;
+        this.createdate = createdate;
+        this.postedby = postedby;
+        this.link = link;
     }
 
     public String getId() {
@@ -27,12 +31,12 @@ public class News {
         this.id = id;
     }
 
-    public String getHeadline() {
-        return headline;
+    public String getTopic() {
+        return topic;
     }
 
-    public void setHeadline(String headline) {
-        this.headline = headline;
+    public void setTopic(String topic) {
+        this.topic = topic;
     }
 
     public String getDescription() {
@@ -51,11 +55,27 @@ public class News {
         this.imagename = imagename;
     }
 
-    public String getPosted_date() {
-        return posted_date;
+    public String getCreatedate() {
+        return createdate;
     }
 
-    public void setPosted_date(String posted_date) {
-        this.posted_date = posted_date;
+    public void setCreatedate(String createdate) {
+        this.createdate = createdate;
+    }
+
+    public String getPostedby() {
+        return postedby;
+    }
+
+    public void setPostedby(String postedby) {
+        this.postedby = postedby;
+    }
+
+    public String getLink() {
+        return link;
+    }
+
+    public void setLink(String link) {
+        this.link = link;
     }
 }

@@ -1,6 +1,72 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout
-    xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent"
-    android:layout_height="match_parent">
+<android.support.v7.widget.CardView
+    xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="wrap_content"
+    android:layout_height="wrap_content">
 
-</android.support.constraint.ConstraintLayout>
+    <RelativeLayout
+        android:layout_width="wrap_content"
+        android:layout_height="200sp"
+        android:background="@drawable/border">
+
+        <TextView
+            android:id="@+id/newsrvtopic"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Topic"
+            android:textAllCaps="true"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            />
+
+
+        <ImageView
+            android:layout_width="150sp"
+            android:layout_height="wrap_content"
+            android:src="@mipmap/ic_launcher"
+            android:layout_below="@+id/newsrvtopic"
+            android:id="@+id/newsrvimg"/>
+
+        <TextView
+            android:id="@+id/newsrvpostedby"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Posted By"
+            android:textAllCaps="true"
+            android:textSize="10sp"
+            android:layout_below="@id/newsrvimg"
+            />
+        <TextView
+            android:id="@+id/newsrvcreateddate"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Date"
+            android:textAllCaps="true"
+            android:textSize="10sp"
+            android:layout_below="@id/newsrvimg"
+            android:layout_toRightOf="@+id/newsrvpostedby"
+            />
+        <TextView
+            android:id="@+id/newsrvdescription"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Descritpion"
+            android:textAllCaps="true"
+            android:textSize="15sp"
+            android:layout_below="@id/newsrvpostedby"
+            />
+        <TextView
+            android:id="@+id/newsrvlink"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Link"
+            android:textAllCaps="true"
+            android:textSize="12sp"
+            android:layout_below="@id/newsrvdescription"
+            android:textStyle="italic"
+
+            />
+
+
+    </RelativeLayout>
+
+</android.support.v7.widget.CardView>
