@@ -5,10 +5,48 @@
     android:layout_height="match_parent"
     tools:context=".Activities.FeedPost">
 
-    <!-- TODO: Update blank fragment layout -->
-    <TextView
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="This is feed" />
+        android:layout_height="120sp"
+        android:orientation="vertical">
+<TextView
+    android:layout_width="match_parent"
+    android:layout_height="20sp" 
+    android:background="#E4E2E2"
+    android:text="Create Post"
+    />
+        
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="60sp"
+            android:hint="Post Your Meomories......"
+            android:id="@+id/post_id"
+            />
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="horizontal"
+            >
+        <Button
+            android:layout_width="100sp"
+            android:layout_height="match_parent"
+            android:text="Photo"
+            android:drawableLeft="@drawable/ic_image_images"
+            android:id="@+id/feedbtnphoto"
+            android:layout_weight="2"
+            />
+            <EditText
+                android:layout_width="150sp"
+                android:layout_height="match_parent"
+                android:id="@+id/feededitimage"
+                android:layout_weight="2"
+                android:visibility="invisible"/>
+
+
+
+        </LinearLayout>
+
+
+    </LinearLayout>
 
 </FrameLayout>
