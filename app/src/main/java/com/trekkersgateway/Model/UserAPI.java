@@ -1,6 +1,8 @@
 package com.trekkersgateway.Model;
 
 
+import java.util.List;
+
 import okhttp3.MultipartBody;
 import retrofit2.Call;
 import retrofit2.http.Body;
@@ -19,6 +21,10 @@ public interface UserAPI {
 
     @POST("feed")
     Call<Void> addFeed(@Body Feed feed);
+
+    //this is a get method that will get all the data of items from API
+    @GET("news")
+    Call<List<News>> getAllNews();
 
    //for login
     @FormUrlEncoded

@@ -2,23 +2,23 @@ package com.trekkersgateway.Model;
 
 
 public class News {
-    String id,topic,description,imagename,createdate,postedby,link;
+    String id,topic,description,imagename,createddate,postedby,link;
 
-    public News(String id, String topic, String description, String imagename, String createdate, String postedby, String link) {
+    public News(String id, String topic, String description, String imagename, String createddate, String postedby, String link) {
         this.id = id;
         this.topic = topic;
         this.description = description;
         this.imagename = imagename;
-        this.createdate = createdate;
+        this.createddate = createddate;
         this.postedby = postedby;
         this.link = link;
     }
 
-    public News(String topic, String description, String imagename, String createdate, String postedby, String link) {
+    public News(String topic, String description, String imagename, String createddate, String postedby, String link) {
         this.topic = topic;
         this.description = description;
         this.imagename = imagename;
-        this.createdate = createdate;
+        this.createddate = createddate;
         this.postedby = postedby;
         this.link = link;
     }
@@ -56,11 +56,11 @@ public class News {
     }
 
     public String getCreatedate() {
-        return createdate;
+        return createddate;
     }
 
-    public void setCreatedate(String createdate) {
-        this.createdate = createdate;
+    public void setCreatedate(String createddate) {
+        this.createddate = createddate;
     }
 
     public String getPostedby() {
